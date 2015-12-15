@@ -13,6 +13,7 @@ ConnectionManager::ConnectionManager(QObject *parent) : QObject(parent)
     QNetworkRequest request;
     request.setUrl(getUrl);
     manager->get(request);
+    int a = 0;
 }
 
 void ConnectionManager::getNewToken(QString newToken)
