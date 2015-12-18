@@ -22,12 +22,14 @@ public:
     QGridLayout* actionLayout;
     QPushButton* sendButton;
     QTextEdit* sendString;
+    QPushButton* refreshButton;
 
 signals:
     void newRequest(QString request);
 
 public slots:
     void sendButtonClicked(bool);
+    void refreshButtonClicked(bool);
 };
 
 #endif // ACTIONWINDOW_H

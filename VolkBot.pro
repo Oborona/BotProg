@@ -3,6 +3,7 @@ QT += gui
 QT += network
 QT += webkit
 QT += webkitwidgets
+QT += xml
 CONFIG += c++11
 
 SOURCES += \

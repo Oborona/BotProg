@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QWebView>
 
+
 class ConnectionManager : public QObject
 {
     Q_OBJECT

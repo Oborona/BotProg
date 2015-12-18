@@ -13,7 +13,6 @@ ConnectionManager::ConnectionManager(QObject *parent) : QObject(parent)
     QNetworkRequest request;
     request.setUrl(getUrl);
     manager->get(request);
-    int a = 0;
 }
 
 void ConnectionManager::getNewToken(QString newToken)
@@ -26,7 +25,18 @@ void ConnectionManager::networkFinished(QNetworkReply* reply)
     QString replyString = reply->readAll();
     if (replyString.contains("could not get application"))
         emit tokenIsInvalid();
-    qDebug() << replyString;
+    // предположим что это даст инфу о том что это результат запроса
+    // списка контактов
+    if (replyString.contains("count"))
+    {
+//        QStringList response = replyString.split("{");
+//        for (auto i = 0; i < response.size(); i++)
+//        {
+//            qDebug() << response.at(i);
+//            qDebug() << "____________";
+//        }
+    }
+    qDebug() << replyString.toUtf8();
 
 }
 
@@ -51,6 +61,11 @@ void ConnectionManager::processNewRequest(QString str)
       url += requestList.at(2);
       url += "&message=";
       url += requestList.at(3);
+    }
+    if (requestList.at(0) == "refresh")
+    {
+        url += "https://api.vk.com/method/messages.getDialogs.xml?&v=5.40&access_token=";
+        url += token;
     }
     QNetworkRequest request;
     qDebug() << url;
