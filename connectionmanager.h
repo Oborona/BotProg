@@ -6,7 +6,8 @@
 #include <QNetworkReply>
 #include <QDebug>
 #include <QWebView>
-
+#include <QXmlInputSource>
+#include <QXmlReader>
 
 class ConnectionManager : public QObject
 {
@@ -15,6 +16,8 @@ public:
     explicit ConnectionManager(QObject *parent = 0);
     QNetworkAccessManager* manager;
     QString token;
+
+    QXmlReader* xmlReader;
 
 signals:
     void tokenIsInvalid();

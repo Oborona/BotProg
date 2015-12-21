@@ -13,6 +13,9 @@ ConnectionManager::ConnectionManager(QObject *parent) : QObject(parent)
     QNetworkRequest request;
     request.setUrl(getUrl);
     manager->get(request);
+
+    //xmlReader = new QXmlReader();
+
 }
 
 void ConnectionManager::getNewToken(QString newToken)
@@ -29,6 +32,9 @@ void ConnectionManager::networkFinished(QNetworkReply* reply)
     // списка контактов
     if (replyString.contains("count"))
     {
+          QXmlInputSource source;
+          source.setData(replyString);
+//          xmlReader->
 //        QStringList response = replyString.split("{");
 //        for (auto i = 0; i < response.size(); i++)
 //        {
@@ -64,7 +70,7 @@ void ConnectionManager::processNewRequest(QString str)
     }
     if (requestList.at(0) == "refresh")
     {
-        url += "https://api.vk.com/method/messages.getDialogs.xml?&v=5.40&access_token=";
+        url += "https://api.vk.com/method/messages.getDialogs?&v=5.40&access_token=";
         url += token;
     }
     QNetworkRequest request;
