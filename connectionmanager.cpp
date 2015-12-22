@@ -14,7 +14,6 @@ ConnectionManager::ConnectionManager(QObject *parent) : QObject(parent)
     request.setUrl(getUrl);
     manager->get(request);
 
-    //xmlReader = new QXmlReader();
 
 }
 
@@ -32,9 +31,22 @@ void ConnectionManager::networkFinished(QNetworkReply* reply)
     // списка контактов
     if (replyString.contains("count"))
     {
-          QXmlInputSource source;
-          source.setData(replyString);
-//          xmlReader->
+        QJsonDocument response = QJsonDocument::fromJson(replyString.toUtf8());
+        QJsonObject object = response.object();
+        if (object.isEmpty())
+        {
+            qDebug() << "Response is empty!";
+        }
+        else
+        {
+            qDebug() << "Response is full of yummy data!";
+            QJsonArray array = object["items"].toArray();
+            foreach (const QJsonValue &value, array)
+            {
+                QJsonObject obj = value.toObject();
+                qDebug() << obj["Message"].toString();
+            }
+        }
 //        QStringList response = replyString.split("{");
 //        for (auto i = 0; i < response.size(); i++)
 //        {
@@ -42,7 +54,7 @@ void ConnectionManager::networkFinished(QNetworkReply* reply)
 //            qDebug() << "____________";
 //        }
     }
-    qDebug() << replyString.toUtf8();
+    //qDebug() << replyString.toUtf8();
 
 }
 
