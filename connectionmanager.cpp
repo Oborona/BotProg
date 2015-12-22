@@ -39,13 +39,36 @@ void ConnectionManager::networkFinished(QNetworkReply* reply)
         }
         else
         {
-            qDebug() << "Response is full of yummy data!";
-            QJsonArray array = object["items"].toArray();
-            foreach (const QJsonValue &value, array)
+            // Открываем скобки респоунса
+            QJsonValue responseValue = object.value("response");
+
+            // Делаем его объектом
+            QJsonObject response = responseValue.toObject();
+
+            // Вынимаем массив айтемов
+            QJsonArray items = response["items"].toArray();
+
+            // Вынимаем из массива инфу
+            for(int i = 0; i < items.size(); i++)
             {
-                QJsonObject obj = value.toObject();
-            //    qDebug() << obj["Message"].toString();
+                // Вынимаем айтем из массива
+                QJsonObject item = items.at(i).toObject();
+
+                // Вынимаем валюе сообщения из айтема
+                QJsonValue messageValue = item.value("message");
+
+                // Создаем объект сообщения
+                QJsonObject message = messageValue.toObject();
+
+                // Вынимаем тайтл и айди из сообщения
+                QByteArray str = message.value("title").toString().toLocal8Bit();
+
+                qDebug() << QString::fromStdString(str)
+                         << message.value("user_id").toInt()
+                         << message.value("chat_id").toInt();
+
             }
+
         }
 //        QStringList response = replyString.split("{");
 //        for (auto i = 0; i < response.size(); i++)
