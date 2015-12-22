@@ -44,7 +44,7 @@ void ConnectionManager::networkFinished(QNetworkReply* reply)
             foreach (const QJsonValue &value, array)
             {
                 QJsonObject obj = value.toObject();
-                qDebug() << obj["Message"].toString();
+            //    qDebug() << obj["Message"].toString();
             }
         }
 //        QStringList response = replyString.split("{");
