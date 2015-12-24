@@ -9,6 +9,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonValue>
+#include <QMessageBox>
 
 class ConnectionManager : public QObject
 {
@@ -20,6 +21,8 @@ public:
 
 signals:
     void tokenIsInvalid();
+    void sendDialogInfo(QString dialogs);
+
 public slots:
     void getNewToken(QString newToken);
     void networkFinished(QNetworkReply* reply);

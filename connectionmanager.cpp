@@ -61,10 +61,10 @@ void ConnectionManager::networkFinished(QNetworkReply* reply)
                 QJsonObject message = messageValue.toObject();
 
                 // Вынимаем тайтл и айди из сообщения
-                QByteArray str = message.value("title").toString().toLocal8Bit();
+                QString str = message.value("title").toString();
 
-                qDebug() << QString::fromStdString(str)
-                         << message.value("user_id").toInt()
+
+                qDebug() << message.value("user_id").toInt()
                          << message.value("chat_id").toInt();
 
             }
