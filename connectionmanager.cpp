@@ -62,11 +62,10 @@ void ConnectionManager::networkFinished(QNetworkReply* reply)
 
                 // Вынимаем тайтл и айди из сообщения
                 QString str = message.value("title").toString();
+                str += QString("/./%1/./%2").arg(message.value("user_id").toInt()).arg(message.value("chat_id").toInt());
 
-
-                qDebug() << message.value("user_id").toInt()
-                         << message.value("chat_id").toInt();
-
+                //qDebug() << str;
+                emit sendDialogInfo(str);
             }
 
         }

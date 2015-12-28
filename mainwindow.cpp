@@ -27,7 +27,6 @@ void MainWindow::tokenIsInvalid()
 {
     layout->removeWidget(actionWin);
     layout->addWidget(webWin);
-//    this->setLayout(wvLayout);
     webWin->setUrl(QUrl("https://oauth.vk.com/authorize?client_id=3682744%20&scope=offline,messages,wall&v=5.40&redirect_uri=https://oauth.vk.com/blank.html&response_type=token"));
 }
 
