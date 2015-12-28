@@ -2,7 +2,7 @@
 
 ConnectionManager::ConnectionManager(QObject *parent) : QObject(parent)
 {
-    token = "0"; //66ba63fe69142ada1257daea8d79f0a3480eeb17552cf8480d0ae2ac5e3fcfafae45b6db4933e03926481";
+    token = "0";
     manager = new QNetworkAccessManager();
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(networkFinished(QNetworkReply*)));
     connect(manager, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(getErrors(QNetworkReply*,QList<QSslError>)));
